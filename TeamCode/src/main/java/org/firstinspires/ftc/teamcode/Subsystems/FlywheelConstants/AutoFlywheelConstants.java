@@ -19,7 +19,7 @@ public class AutoFlywheelConstants {
 
     // RPM Regression
     private static final double RPM_SLOPE = 21.35148;
-    private static final double RPM_INTERCEPT = 2234.33841;
+    private static final double RPM_INTERCEPT = 2434.33841;
 
     // Hood Regression
     private static final double HOOD_SLOPE = -0.880766;

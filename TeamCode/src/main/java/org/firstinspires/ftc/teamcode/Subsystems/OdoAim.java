@@ -32,7 +32,7 @@ public class OdoAim {
     private double manualOffsetRad = 0.0;
     public static double OFFSET_STEP_RAD = Math.toRadians(3.0);
 
-     Pose REDTARGET = new Pose(152.0 , 146.0 );
+     Pose REDTARGET = new Pose(152.0 , 142.0 );
      Pose BLUETARGET = new Pose(-3, 140.0);
 
     private final PIDFController limelightPIDF =
@@ -175,19 +175,9 @@ public class OdoAim {
 
         Pose currentPose = follower.getPose();
 
-        double newX = currentPose.getX() + 15.0;
-        double newY = currentPose.getY() - 17.0;
+        double newX = currentPose.getX() - 13.0;
+        double newY = currentPose.getY() - 12.0;
 
         targetPose = new Pose(newX, newY);
-    }
-    public void restoreFromStorage(double storedTurretRadians) {
-
-        turretPosition = storedTurretRadians;
-
-        // Reset PID internal error memory
-        odometryPIDF.reset();
-        limelightPIDF.reset();
-
-        manualOffsetRad = 0.0;
     }
 }

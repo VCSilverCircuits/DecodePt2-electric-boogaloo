@@ -86,7 +86,7 @@ public class CloseRedAuto extends OpMode {
         follower.setMaxPower(1);
         follower.setStartingPose(startPose);
         follower.update();
-        poseStorage = new PoseStorage();
+        poseStorage = new PoseStorage(follower);
 
         // Turret
         turret = hardwareMap.get(DcMotorEx.class, "turretRotation");
@@ -118,6 +118,7 @@ public class CloseRedAuto extends OpMode {
     public void loop() {
         follower.update();
         Pose robotPose = follower.getPose();
+        poseStorage.Update();
         double currentAngleDeg = turret.getCurrentPosition() * DEGREES_PER_TICK;
         double power = turretController.getTurretPower(currentAngleDeg);
 

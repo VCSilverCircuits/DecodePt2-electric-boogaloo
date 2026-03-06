@@ -50,13 +50,12 @@ public class RedTele extends OpMode {
     public void init() {
 
         follower = Constants.createFollower(hardwareMap);
-
-        odoAim = new OdoAim(hardwareMap, follower, true);
         follower.setPose(PoseStorage.currentPose);
 
-        odoAim.restoreFromStorage(PoseStorage.turretRadians);
+        odoAim = new OdoAim(hardwareMap, follower, true);
 
-        odoAim.update();
+        // Initially idle, hold current position
+        odoAim.idle();
 
         flywheel = new TeleFlywheelConstants(hardwareMap, follower, true);
 
@@ -93,6 +92,7 @@ public class RedTele extends OpMode {
     @Override
     public void start() {
         follower.startTeleopDrive();
+        follower.setStartingPose(PoseStorage.currentPose);
         flywheel.enable();
     }
 

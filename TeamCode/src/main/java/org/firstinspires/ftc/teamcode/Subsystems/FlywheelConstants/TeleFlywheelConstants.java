@@ -165,7 +165,7 @@ public class TeleFlywheelConstants {
 
         Pose currentPose = follower.getPose();
 
-        double newX = currentPose.getX() + 13.0;
+        double newX = currentPose.getX() - 11.0;
         double newY = currentPose.getY() - 15.0;
 
         targetPose = new Pose(newX, newY);

@@ -171,10 +171,9 @@ public class FarAutoRed extends OpMode {
                 pathState = 2;
             break;
                case 7:
+                   PoseStorage.currentPose = follower.getPose();
                    turret.idle();
                    if (pathTimer.getElapsedTimeSeconds() > 4){
-                       PoseStorage.currentPose = follower.getPose();
-                       PoseStorage.turretRadians = turret.getTurretPosition();
                        requestOpModeStop();
                    }
                     break;
