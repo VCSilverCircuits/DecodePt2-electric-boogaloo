@@ -378,24 +378,6 @@ public class CloseBlueAuto extends OpMode {
 
     //flip pose across the middle of the field
     //alternatively, could just subtract x from 144, the other end of the field!
-    private Pose flipCoordsAcrossField(double x, double y, double heading) {
-        //Center of the field is 72,72
-        //Bottom left is 0,0
-        double fieldSizeX = 144;
-        //double distance = x-(fieldSizeX/2);
-        double newX = fieldSizeX - x;
-        double headingDistance = heading - 90;
-        double newHeading = 90 - headingDistance;
-        return new Pose(newX,y,newHeading);
-    }
-    private Pose flipCoordsAcrossField(double x, double y) {
-        //Center of the field is 72,72
-        //Bottom left is 0,0
-        double fieldSizeX = 144;
-        //double distance = x-(fieldSizeX/2);
-        double newX = fieldSizeX - x;
-        return new Pose(newX,y);
-    }
     //mirror old redauto headings
     private double flipHeading(double heading) {
         double headingDistance = heading - 90;

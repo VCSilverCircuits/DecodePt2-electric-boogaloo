@@ -21,8 +21,8 @@ public class ServoGroup {
     private Servo lastAddedServo = null;
 
     // Timing constants
-    private static final long UP_DURATION_MS = 275;
-    private static final long DOWN_DELAY_MS = 275;
+    private static final long UP_DURATION_MS = 220;
+    private static final long DOWN_DELAY_MS = 220;
 
     public ServoGroup(HardwareMap hw,
                       String servo1, String servo2, String servo3, String stopper1) {
@@ -54,6 +54,12 @@ public class ServoGroup {
         addServoSafely(s1);
         addServoSafely(s2);
         addServoSafely(s3);
+    }
+    public void idle(){
+        stopper.setPosition(0);
+        s1.setPosition(0.05);
+        s2.setPosition(0.05);
+        s3.setPosition(0.05);
     }
 
     /* =========================================================
@@ -143,7 +149,7 @@ public class ServoGroup {
 
         // If not running, keep stopper closed and exit
         if (!running) {
-            stopper.setPosition(0);
+            idle();
             return;
         }
 
