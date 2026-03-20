@@ -19,6 +19,7 @@ FTC robot controller code for **VC Silver Circuits (Team 16158)** for the 2025-2
 - [Teleop Controls](#teleop-controls)
 - [Autonomous Sequences](#autonomous-sequences)
 - [Tuning Parameters](#tuning-parameters)
+- [Hot Reload with Sloth](#hot-reload-with-sloth)
 
 ---
 
@@ -318,5 +319,30 @@ Mirrors the Blue auto using coordinate flipping (`flipX` / `flipHeading` helpers
 3. Verify all hardware config names match the [Hardware Map](#hardware-map) table above.
 4. Run `Tuning` OpMode to verify PedroPathing constants for the current robot.
 5. Run `MotifScannerAuto` in pre-match to detect and store the motif pattern before running teleop.
-6. Optionally use sloth for faster deploys to the robot
 6. For competition matches, run the appropriate auto first, then select the matching alliance teleop — pose is automatically transferred via `PoseStorage`.
+
+---
+
+## Hot Reload with Sloth
+
+This project uses [Sloth](https://github.com/Dairy-Foundation/Sloth) for hot code reloading. Instead of a full 40+ second APK install, Sloth pushes only changed TeamCode classes to the robot in under 2 seconds.
+
+### Daily workflow
+
+1. Make code changes in `TeamCode`
+2. Run the **`deploySloth`** run configuration in Android Studio
+3. Restart the OpMode on the Driver Hub — changes are live immediately
+
+### Full install (required when)
+
+- Adding or updating library dependencies
+- Modifying files outside of `TeamCode` (e.g. `build.gradle`, `FtcRobotController`)
+- First-time setup on a new robot
+
+For a full install, run `removeSlothRemote` first (added as a "Before launch" step in the TeamCode run config), then do a normal build & deploy.
+
+### Notes
+
+- Only classes under `org.firstinspires.ftc.teamcode` are hot-reloaded
+- Classes annotated with `@Pinned` are excluded from hot reload and always require a full install
+- Sloth changes survive robot restarts and power cycles
