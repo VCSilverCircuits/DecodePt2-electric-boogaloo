@@ -15,7 +15,6 @@ import org.firstinspires.ftc.teamcode.Subsystems.ColorSensorTests.ColorSensors;
 import org.firstinspires.ftc.teamcode.Subsystems.FlywheelConstants.AutoFlywheelConstants;
 import org.firstinspires.ftc.teamcode.Subsystems.Motif.ServoGroup;
 import org.firstinspires.ftc.teamcode.Subsystems.OdoAim;
-import org.firstinspires.ftc.teamcode.Subsystems.OdoAimBlue;
 import org.firstinspires.ftc.teamcode.Subsystems.PoseStorage;
 import org.firstinspires.ftc.teamcode.pedroPathing.AutoConstants;
 
@@ -44,12 +43,13 @@ public class FarAutoRed extends OpMode {
     private int pathState = 0;
 
     // Poses
-    private static final Pose startPose = new Pose(59.963, 10.019, Math.toRadians(180));
-    private static final Pose firingPose = new Pose(53, 10.019, Math.toRadians(180));
+    private static final Pose startPose = new Pose(84.037, 10.019, Math.toRadians(0));
+    private static final Pose firingPose = new Pose(96, 10.019, Math.toRadians(0));
 
-    private static final Pose intake1 = new Pose(15.103, 36, Math.toRadians(180));
-    private static final Pose intake2 = new Pose(10, 12.019, Math.toRadians(180));
-    private static final Pose endPose = new Pose(10, 30, Math.toRadians(180));
+
+    private static final Pose intake1 = new Pose(128.897, 36, Math.toRadians(0));
+    private static final Pose intake2 = new Pose(134, 12.019, Math.toRadians(0));
+    private static final Pose endPose = new Pose(134, 30, Math.toRadians(0));
 
     @Override
     public void init() {

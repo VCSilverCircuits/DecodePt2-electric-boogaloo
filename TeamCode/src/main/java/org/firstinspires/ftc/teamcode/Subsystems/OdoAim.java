@@ -32,7 +32,8 @@ public class OdoAim {
     private double manualOffsetRad = 0.0;
     public static double OFFSET_STEP_RAD = Math.toRadians(3.0);
 
-     Pose REDTARGET = new Pose(152.0 , 146.0 );
+     Pose REDTARGET = new Pose(142 , 142 );
+     // x:152, y:146
      Pose BLUETARGET = new Pose(-3, 140.0);
 
     private final PIDFController limelightPIDF =
