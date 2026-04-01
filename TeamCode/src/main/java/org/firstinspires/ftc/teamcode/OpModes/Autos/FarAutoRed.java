@@ -114,9 +114,9 @@ public class FarAutoRed extends OpMode {
         // End condition
         if (!endTriggered && poseTimer.getElapsedTimeSeconds() >= 28.5) {
             endTriggered = true;
-
             follower.followPath(paths.firingToEnd);
-
+        }
+        if (endTriggered && pathTimer.getElapsedTimeSeconds() >=30){
             PoseStorage.currentPose = follower.getPose();
             PoseStorage.turretRadians = turret.getTurretPosition();
         }

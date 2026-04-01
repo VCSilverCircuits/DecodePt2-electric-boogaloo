@@ -363,6 +363,7 @@ public class CloseBlueAuto extends OpMode {
     private Follower follower;
     private Timer pathTimer;
     private Timer leaveTimer;
+    private Timer poseTimer;
     MecanumConstants mecanumConstants;
 
     private DcMotorEx turret;
@@ -383,6 +384,7 @@ public class CloseBlueAuto extends OpMode {
         double headingDistance = heading - 90;
         return (90 - headingDistance);
     }
+
     private double flipX(double x) {
         double fieldSizeX = 144;
         //double distance = x-(fieldSizeX/2);
@@ -396,16 +398,17 @@ public class CloseBlueAuto extends OpMode {
     private final Pose turnToIntake = new Pose(flipX(90.39252336448597), 89.27101962616824, Math.toRadians(flipHeading(0)));
     private final Pose intake1 = new Pose(flipX(124), 92, Math.toRadians(flipHeading(-8)));
     private final Pose releaseBalls = new Pose(flipX(125), 81, Math.toRadians(flipHeading(0)));
-    private final Pose intake2Lineup = new Pose(flipX(95.15887850467287),65,Math.toRadians(flipHeading(-3)));
-    private final Pose intake2 = new Pose(flipX(131),65, Math.toRadians(flipHeading(-7)));
-    private final Pose intake3Lineup = new Pose(flipX(94.75700934579439),42,Math.toRadians(flipHeading(-10)));
-    private final Pose intake3 = new Pose(flipX(130),42, Math.toRadians(flipHeading(-3)));
+    private final Pose intake2Lineup = new Pose(flipX(95.15887850467287), 65, Math.toRadians(flipHeading(-3)));
+    private final Pose intake2 = new Pose(flipX(131), 65, Math.toRadians(flipHeading(-7)));
+    private final Pose intake3Lineup = new Pose(flipX(94.75700934579439), 42, Math.toRadians(flipHeading(-10)));
+    private final Pose intake3 = new Pose(flipX(130), 42, Math.toRadians(flipHeading(-3)));
     private DcMotorEx leftFlywheel, rightFlywheel;
     private DualMotor flywheel;
-    private Servo servo1, servo2, servo3,servo4;
+    private Servo servo1, servo2, servo3, servo4;
     private DcMotorEx intake;
     private boolean lastFlywheelTrigger = false;
     private boolean lastIntakeTrigger = false;
+    boolean endTriggered = false;
 
 
     boolean shooting1Start = false;
@@ -465,6 +468,7 @@ public class CloseBlueAuto extends OpMode {
         // Timer
         pathTimer = new Timer();
         leaveTimer = new Timer();
+        poseTimer = new Timer();
 
         // Paths
         paths = new Paths(follower);
@@ -484,8 +488,20 @@ public class CloseBlueAuto extends OpMode {
         } else {
             turret.setPower(0);
         }
+        if (!endTriggered && poseTimer.getElapsedTimeSeconds() >= 28.5) {
+            endTriggered = true;
 
-        pathState = paths.autonomousPathUpdate(pathState, robotPose);
+            follower.followPath(paths.endPoseToLineup3);
+        }
+        if (endTriggered && pathTimer.getElapsedTimeSeconds() >=30){
+            PoseStorage.currentPose = follower.getPose();
+            PoseStorage.turretRadians = turret.getCurrentPosition();
+        }
+
+        if (!endTriggered) {
+            pathState = paths.autonomousPathUpdate(pathState, robotPose);
+        }
+
 
         telemetry.addData("Robot Pose", robotPose);
         telemetry.addData("Turret Angle", currentAngleDeg);

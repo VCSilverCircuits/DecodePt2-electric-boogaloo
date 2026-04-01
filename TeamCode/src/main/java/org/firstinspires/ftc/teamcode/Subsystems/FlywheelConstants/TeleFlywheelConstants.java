@@ -23,7 +23,7 @@ public class TeleFlywheelConstants {
     private static final double RPM_INTERCEPT = 750;
 
     // Hood Regression
-    private static final double HOOD_SLOPE = -0.850766;
+    private static final double HOOD_SLOPE = -0.550766;
     private static final double HOOD_INTERCEPT = 109.12875;
     private Pose targetPose; // current target, can change via D-pad
     double REDTARGETX = 150;

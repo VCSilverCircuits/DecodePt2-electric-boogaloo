@@ -51,6 +51,8 @@ public class CloseRedAuto extends OpMode {
     private DualMotor flywheel;
     private Servo servo1, servo2, servo3, servo4;
     private DcMotorEx intake;
+    private Timer poseTimer;
+    boolean endTriggered = false;
 
 
     boolean comingBack = false;
@@ -109,6 +111,7 @@ public class CloseRedAuto extends OpMode {
         // Timer
         pathTimer = new Timer();
         leaveTimer = new Timer();
+        poseTimer = new Timer();
 
         // Paths
         paths = new Paths(follower);
@@ -127,9 +130,20 @@ public class CloseRedAuto extends OpMode {
         } else {
             turret.setPower(0);
         }
+        if (!endTriggered && poseTimer.getElapsedTimeSeconds() >= 28.5) {
+            endTriggered = true;
 
-        pathState = paths.autonomousPathUpdate(pathState, robotPose);
+            follower.followPath(paths.endPoseToLineup3);
 
+        }
+        if (endTriggered && pathTimer.getElapsedTimeSeconds() >=30){
+            PoseStorage.currentPose = follower.getPose();
+            PoseStorage.turretRadians = turret.getCurrentPosition();
+        }
+
+        if (!endTriggered) {
+            pathState = paths.autonomousPathUpdate(pathState, robotPose);
+        }
         telemetry.addData("Robot Pose", robotPose);
         telemetry.addData("Turret Angle", currentAngleDeg);
         telemetry.addData("Turret Power", power);

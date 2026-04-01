@@ -32,13 +32,12 @@ public class OdoAim {
     private double manualOffsetRad = 0.0;
     public static double OFFSET_STEP_RAD = Math.toRadians(3.0);
 
-     Pose REDTARGET = new Pose(152 , 146 );
+     Pose REDTARGET = new Pose(148 , 142 );
      // x:152, y:146
-     Pose BLUETARGET = new Pose(-3, 140.0);
 
-    Pose REDTARGET_TELE = new Pose(150 , 146 );
+    Pose REDTARGET_TELE = new Pose(148 , 142 );
     // x:152, y:146
-    Pose BLUETARGET_TELE = new Pose(-3, 140.0);
+
 
     private final PIDFController limelightPIDF =
         new PIDFController(0.06, 0.0, 0.008, 0.0);
@@ -48,13 +47,12 @@ public class OdoAim {
 
     private double relativeTargetHeading;
     private boolean isRed;
-    double targetX = isRed ? REDTARGET.getX() : BLUETARGET.getX();
-    double targetY = isRed ? REDTARGET.getY() : BLUETARGET.getY();
+
 
     public OdoAim(HardwareMap hardwareMap, Follower follower, boolean isTele) {
 
         this.follower = follower;
-        this.targetPose = isTele ? REDTARGET_TELE : REDTARGET;
+        this.targetPose = isTele ? REDTARGET : REDTARGET_TELE;
         yawMotor = hardwareMap.get(DcMotorEx.class, "turretRotation");
         yawMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         yawMotor.setDirection(DcMotorSimple.Direction.REVERSE);
