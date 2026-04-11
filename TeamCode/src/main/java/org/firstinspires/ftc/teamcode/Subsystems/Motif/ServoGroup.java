@@ -147,9 +147,8 @@ public class ServoGroup {
        ========================================================= */
     public void loop() {
 
-        // If not running, keep stopper closed and exit
+        // If not running, let the TeleOp control servos directly
         if (!running) {
-            idle();
             return;
         }
 

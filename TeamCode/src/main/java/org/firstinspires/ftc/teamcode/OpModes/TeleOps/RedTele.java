@@ -65,9 +65,9 @@ public class RedTele extends OpMode {
         servo2 = hardwareMap.get(Servo.class, "backFlipper");
         servo3 = hardwareMap.get(Servo.class, "leftFlipper");
 
-        servo1.setPosition(0.05);
-        servo2.setPosition(0.05);
-        servo3.setPosition(0.05);
+        servo1.setPosition(PoseStorage.fingyDown);
+        servo2.setPosition(PoseStorage.fingyDown);
+        servo3.setPosition(PoseStorage.fingyDown);
 
         servos = new ServoGroup(
             hardwareMap,
@@ -195,9 +195,9 @@ public class RedTele extends OpMode {
         }
 
         if (!isFiring) {
-            servo1.setPosition(gamepad1.b ? 1 : 0);
-            servo2.setPosition(gamepad1.a ? 1 : 0);
-            servo3.setPosition(gamepad1.x ? 1 : 0);
+            servo1.setPosition(gamepad1.b ? PoseStorage.fingyUp : PoseStorage.fingyDown);
+            servo2.setPosition(gamepad1.a ? PoseStorage.fingyUp : PoseStorage.fingyDown);
+            servo3.setPosition(gamepad1.x ? PoseStorage.fingyUp : PoseStorage.fingyDown);
         }
 
         // ================= LIFT TOGGLE =================
