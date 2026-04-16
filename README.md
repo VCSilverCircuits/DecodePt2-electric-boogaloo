@@ -175,8 +175,8 @@ Turret aiming controller that keeps the flywheel pointed at the goal.
 - Hard limits: -90 deg to +175 deg turret rotation
 
 **Target poses (field coordinates, inches):**
-- Red goal: (152, 146)
-- Blue goal: (-3, 140)
+- Red goal (OdoAim / Red alliance): (148, 142)
+- Blue goal (OdoAimBlue / Blue alliance): (-3, 140)
 
 ### BlueTeleFlywheelConstants / TeleFlywheelConstants
 
@@ -197,7 +197,7 @@ Manages the sequential firing of the three flipper servos.
 
 - **`StartNonSort()`** — fires servos in fixed order: front → back → left. Used in most match scenarios.
 - **`startMotif()`** — fires servos in the order dictated by the detected motif pattern, matching the right colored piece to the right slot. Requires `MatchMotif` to be set and `ColorSensors` to have latched colors.
-- Each servo is raised for 275 ms then lowered with a 275 ms delay between servos.
+- Each servo is raised for 220 ms then lowered with a 220 ms delay between servos.
 - The `stopper` servo gates the output channel during the sequence.
 
 ### MatchMotif
@@ -235,8 +235,8 @@ Simple static class that persists two values across OpMode transitions (auto →
 | Left stick        | Drive (field-relative)                              |
 | Right stick X     | Rotate (50% speed)                                  |
 | Left bumper       | Toggle turret auto-tracking on/off                  |
-| D-pad left        | Nudge turret aim target -3 inches in X              |
-| D-pad right       | Nudge turret aim target +3 inches in X              |
+| D-pad left        | Nudge turret aim target +3 inches in X              |
+| D-pad right       | Nudge turret aim target -3 inches in X              |
 | D-pad down        | Recalibrate turret and flywheel target positions    |
 | Left trigger      | Toggle intake on/off                                |
 | Right trigger     | Run intake reverse (backspin)                       |
@@ -307,7 +307,7 @@ Mirrors the Blue auto using coordinate flipping (`flipX` / `flipHeading` helpers
 
 | Auto             | RPM  |
 |------------------|------|
-| Close autos      | 3650 |
+| Close autos      | 2750 |
 | Final hold state | 3800 |
 
 ---
