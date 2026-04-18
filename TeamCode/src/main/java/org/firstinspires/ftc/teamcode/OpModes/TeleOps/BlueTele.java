@@ -47,15 +47,19 @@ public class BlueTele extends OpMode {
     private boolean lastDpadLeft = false;
     private boolean lastDpadRight = false;
     private boolean lastDpadDown = false;
+    private boolean lastRightBumper = false;
 
     @Override
     public void init() {
 
         follower = Constants.createFollower(hardwareMap);
-
+        if (PoseStorage.currentPose != null) {
+            follower.setPose(PoseStorage.currentPose);
+            follower.update();
+        }
         odoAim = new OdoAimBlue(hardwareMap, follower, false);
         odoAim.restoreFromStorage(PoseStorage.turretRadians);
-        follower.setPose(PoseStorage.currentPose);
+
         flywheel = new BlueTeleFlywheelConstants(hardwareMap, follower, false);
 
         sensors = new ColorSensors();
@@ -107,7 +111,7 @@ public class BlueTele extends OpMode {
 
         follower.update();
         flywheel.update(-gamepad1.left_stick_y * 50);
-
+        odoAim.odoAim();
         odoAim.update();
         servos.loop();
 
@@ -116,14 +120,6 @@ public class BlueTele extends OpMode {
 
         if (turretButtonPressed && !lastTurretButton) {
             turretTrackingEnabled = !turretTrackingEnabled;
-
-            if (turretTrackingEnabled) {
-                // Reset tracking zero to current idle position
-                odoAim.syncToCurrentPosition();
-            } else {
-                // When turning OFF, hold current position
-                odoAim.idle();
-            }
         }
         lastTurretButton = turretButtonPressed;
 
@@ -144,10 +140,6 @@ public class BlueTele extends OpMode {
             odoAim.odoAim();
         } else {
             odoAim.idle();
-        }
-        if (gamepad1.dpad_down){
-            odoAim.recalibration(follower);
-            flywheel.recalibration(follower);
         }
 
 
@@ -214,10 +206,23 @@ public class BlueTele extends OpMode {
             lift1.setPosition(0.9);
             lift2.setPosition(0.92);
         }
+        boolean rightBumperPressed = gamepad1.right_bumper;
+
+        if (rightBumperPressed && !lastRightBumper) {
+            // Set tele target ONLY when button is pressed
+            odoAim.setTeleTarget(0, 144);
+        }
+
+        lastRightBumper = rightBumperPressed;
 
         // ================= TELEMETRY =================
         telemetry.addData("Turret Tracking Enabled", turretTrackingEnabled);
         telemetry.addData("Turret Offset (deg)", odoAim.getOffsetDegrees());
+        telemetry.addData("position",follower.getPose());
+        telemetry.addData("stored Pose", PoseStorage.currentPose);
+        telemetry.addData("stored radians", PoseStorage.turretRadians);
+        telemetry.addData("turret Pose", odoAim.getTurretPosition());
+        telemetry.addData("target turret Pose", odoAim.getRelativeTargetHeading());
         telemetry.update();
     }
 }

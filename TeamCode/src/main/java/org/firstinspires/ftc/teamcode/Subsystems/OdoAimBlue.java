@@ -116,6 +116,10 @@ public class OdoAimBlue {
             targetPose = new Pose(targetPose.getX() - 3, targetPose.getY());
         }
     }
+    public void setTeleTarget(double x, double y) {
+        this.targetPose = new Pose(x, y);
+    }
+
 
     public void resetOffset() {
         manualOffsetRad = 0.0;

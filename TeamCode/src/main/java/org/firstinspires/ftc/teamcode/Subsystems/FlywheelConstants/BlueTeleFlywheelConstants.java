@@ -19,8 +19,8 @@ public class BlueTeleFlywheelConstants {
     // ================= LINEAR REGRESSION CONSTANTS =================
 
     // RPM Regression
-    private static final double RPM_SLOPE = 21.35148;
-    private static final double RPM_INTERCEPT = 2634.33841;
+    private static final double RPM_SLOPE = 20;
+    private static final double RPM_INTERCEPT = 1100;
 
     // Hood Regression
     private static final double HOOD_SLOPE = -0.850766;

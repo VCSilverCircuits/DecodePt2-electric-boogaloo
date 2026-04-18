@@ -493,10 +493,8 @@ public class CloseBlueAuto extends OpMode {
 
             follower.followPath(paths.endPoseToLineup3);
         }
-        if (endTriggered && pathTimer.getElapsedTimeSeconds() >=30){
-            PoseStorage.currentPose = follower.getPose();
-            PoseStorage.turretRadians = turret.getCurrentPosition();
-        }
+        PoseStorage.currentPose = follower.getPose();
+        PoseStorage.turretRadians = turret.getCurrentPosition();
 
         if (!endTriggered) {
             pathState = paths.autonomousPathUpdate(pathState, robotPose);

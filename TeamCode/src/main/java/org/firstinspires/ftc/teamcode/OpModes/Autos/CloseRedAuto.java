@@ -137,11 +137,8 @@ public class CloseRedAuto extends OpMode {
             follower.followPath(paths.endToFinal);
 
         }
-        if (endTriggered && pathTimer.getElapsedTimeSeconds() >=30){
-            PoseStorage.currentPose = follower.getPose();
-            PoseStorage.turretRadians = turret.getCurrentPosition();
-        }
-
+        PoseStorage.currentPose = follower.getPose();
+        PoseStorage.turretRadians = turret.getCurrentPosition();
         if (!endTriggered) {
             pathState = paths.autonomousPathUpdate(pathState, robotPose);
         }

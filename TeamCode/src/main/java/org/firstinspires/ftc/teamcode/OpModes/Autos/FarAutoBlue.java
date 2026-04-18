@@ -115,11 +115,8 @@ public class FarAutoBlue extends OpMode {
             endTriggered = true;
             follower.followPath(paths.firingToEnd);
         }
-        if (endTriggered && pathTimer.getElapsedTimeSeconds() >=30){
-            PoseStorage.currentPose = follower.getPose();
-            PoseStorage.turretRadians = turret.getTurretPosition();
-        }
-
+        PoseStorage.currentPose = follower.getPose();
+        PoseStorage.turretRadians = turret.getTurretPosition();
         if (!endTriggered) {
             pathState = paths.autonomousPathUpdate(pathState, robotPose);
         }
